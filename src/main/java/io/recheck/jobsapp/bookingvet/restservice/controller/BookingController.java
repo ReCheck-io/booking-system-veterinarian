@@ -6,11 +6,16 @@ import io.recheck.jobsapp.bookingvet.restservice.dto.VisitDateTimeClosedDTO;
 import io.recheck.jobsapp.bookingvet.restservice.entity.Booking;
 import io.recheck.jobsapp.bookingvet.restservice.entity.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.List;
+import javax.validation.*;
+import java.util.Comparator;
 import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 @RestController
 public class BookingController {
@@ -19,18 +24,31 @@ public class BookingController {
     private BookingRepository bookingRepository;
 
     @GetMapping("/booking")
-    public Iterable<Booking> getAll() {
+    public Iterable<Booking> get(FindByOwnerDTO findByOwnerDTO) {
+        if (StringUtils.hasText(findByOwnerDTO.getOwnerName())) {
+            ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+            Validator validator = factory.getValidator();
+            Set<ConstraintViolation<FindByOwnerDTO>> constraintViolations = validator.validate(findByOwnerDTO);
+            if (!constraintViolations.isEmpty()) {
+                Comparator<ConstraintViolation<FindByOwnerDTO>> byTimestamp =
+                        Comparator.comparing(ConstraintViolation::getMessage);
+
+                Supplier<TreeSet<ConstraintViolation<FindByOwnerDTO>>> supplier =
+                        () -> new TreeSet<>(byTimestamp);
+
+                constraintViolations = constraintViolations.stream()
+                        .collect(Collectors.toCollection(supplier));
+
+                throw new javax.validation.ConstraintViolationException(constraintViolations);
+            }
+            return bookingRepository.findByOwnerName(findByOwnerDTO.getOwnerName());
+        }
         return bookingRepository.findAll();
     }
 
     @GetMapping("/booking/{id}")
     public Optional<Booking> getById(@PathVariable Long id) {
         return bookingRepository.findById(id);
-    }
-
-    @GetMapping("/bookings")
-    public List<Booking> findByOwner(@Valid FindByOwnerDTO findByOwnerDTO) {
-        return bookingRepository.findByOwnerName(findByOwnerDTO.getOwnerName());
     }
 
     @PostMapping("/booking")
