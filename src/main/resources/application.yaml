@@ -3,3 +3,14 @@ server:
     include-message: always
     include-binding-errors: always
     include-exception: false
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://freedb.tech:3306/freedbtech_bookingvetdb
+    username: freedbtech_bookingvetuser
+    password: CQhi4jHyCu
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
