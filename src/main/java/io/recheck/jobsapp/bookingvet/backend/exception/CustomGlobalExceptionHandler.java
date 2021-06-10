@@ -1,7 +1,6 @@
-package io.recheck.jobsapp.bookingvet.restservice.exception;
+package io.recheck.jobsapp.bookingvet.backend.exception;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

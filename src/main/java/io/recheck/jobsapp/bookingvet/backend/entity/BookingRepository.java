@@ -1,4 +1,4 @@
-package io.recheck.jobsapp.bookingvet.restservice.entity;
+package io.recheck.jobsapp.bookingvet.backend.entity;
 
 import org.springframework.data.repository.CrudRepository;
 

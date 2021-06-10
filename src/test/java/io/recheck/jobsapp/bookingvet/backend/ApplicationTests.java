@@ -1,9 +1,7 @@
-package io.recheck.jobsapp.bookingvet.restservice;
+package io.recheck.jobsapp.bookingvet.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 @SpringBootTest
 class ApplicationTests {

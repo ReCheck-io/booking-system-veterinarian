@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.recheck</groupId>
-	<artifactId>jobs-app.booking-vet.rest-service</artifactId>
+	<artifactId>jobs-app.booking-vet.backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>jobs-app.booking-vet.rest-service</name>
+	<name>jobs-app.booking-vet.backend</name>
 	<description>Application to apply for job position</description>
 	<properties>
 		<java.version>8</java.version>

@@ -1,4 +1,4 @@
-package io.recheck.jobsapp.bookingvet.restservice.dto;
+package io.recheck.jobsapp.bookingvet.backend.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

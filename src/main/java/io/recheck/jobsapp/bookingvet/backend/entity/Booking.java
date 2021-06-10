@@ -1,6 +1,6 @@
-package io.recheck.jobsapp.bookingvet.restservice.entity;
+package io.recheck.jobsapp.bookingvet.backend.entity;
 
-import io.recheck.jobsapp.bookingvet.restservice.dto.BookingUpdateDTO;
+import io.recheck.jobsapp.bookingvet.backend.dto.BookingUpdateDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;

@@ -1,10 +1,10 @@
-package io.recheck.jobsapp.bookingvet.restservice.controller;
+package io.recheck.jobsapp.bookingvet.backend.controller;
 
-import io.recheck.jobsapp.bookingvet.restservice.dto.BookingUpdateDTO;
-import io.recheck.jobsapp.bookingvet.restservice.dto.FindByOwnerDTO;
-import io.recheck.jobsapp.bookingvet.restservice.dto.VisitDateTimeClosedDTO;
-import io.recheck.jobsapp.bookingvet.restservice.entity.Booking;
-import io.recheck.jobsapp.bookingvet.restservice.entity.BookingRepository;
+import io.recheck.jobsapp.bookingvet.backend.dto.BookingUpdateDTO;
+import io.recheck.jobsapp.bookingvet.backend.dto.FindByOwnerDTO;
+import io.recheck.jobsapp.bookingvet.backend.dto.VisitDateTimeClosedDTO;
+import io.recheck.jobsapp.bookingvet.backend.entity.Booking;
+import io.recheck.jobsapp.bookingvet.backend.entity.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
