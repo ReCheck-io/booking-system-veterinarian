@@ -7,9 +7,11 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://freedb.tech:3306/freedbtech_bookingvetdb
-    username: freedbtech_bookingvetuser
-    password: CQhi4jHyCu
+    url: jdbc:mysql://127.0.0.1:3306/bookingvetdb
+    initialization-mode: always
+    separator: ^
+    username: app_dev_loc
+    password: app_dev_loc_opx07
   jpa:
     hibernate:
       ddl-auto: update

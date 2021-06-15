@@ -1,5 +1,6 @@
 package io.recheck.jobsapp.bookingvet.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.recheck.jobsapp.bookingvet.backend.dto.BookingUpdateDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,6 +39,9 @@ public class Booking {
     private boolean visitIsFirstTime = true;
 
     private boolean visitDateTimeClosed;
+
+    @JsonIgnore
+    private String principalName;
 
     public Booking(BookingUpdateDTO bookingUpdateDTO) {
         BeanUtils.copyProperties(bookingUpdateDTO, this);

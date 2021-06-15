@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.*;
+import java.security.Principal;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.Set;
@@ -24,7 +25,7 @@ public class BookingController {
     private BookingRepository bookingRepository;
 
     @GetMapping("/booking")
-    public Iterable<Booking> get(FindByOwnerDTO findByOwnerDTO) {
+    public Iterable<Booking> get(FindByOwnerDTO findByOwnerDTO, Principal principal) {
         if (StringUtils.hasText(findByOwnerDTO.getOwnerName())) {
             ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
             Validator validator = factory.getValidator();
@@ -41,24 +42,30 @@ public class BookingController {
 
                 throw new javax.validation.ConstraintViolationException(constraintViolations);
             }
-            return bookingRepository.findByOwnerName(findByOwnerDTO.getOwnerName());
+            return bookingRepository.findByOwnerNameAndPrincipalName(findByOwnerDTO.getOwnerName(), principal.getName());
         }
-        return bookingRepository.findAll();
+        return bookingRepository.findByPrincipalName(principal.getName());
     }
 
     @GetMapping("/booking/{id}")
-    public Optional<Booking> getById(@PathVariable Long id) {
-        return bookingRepository.findById(id);
+    public Optional<Booking> getById(@PathVariable Long id, Principal principal) {
+        return bookingRepository.findByIdAndPrincipalName(id, principal.getName());
     }
 
     @PostMapping("/booking")
-    public Booking save(@RequestBody @Valid Booking booking) {
+    public Booking save(@RequestBody @Valid Booking booking, Principal principal) {
+        booking.setPrincipalName(principal.getName());
         return bookingRepository.save(booking);
     }
 
     @PutMapping("/booking")
-    public void update(@RequestBody @Valid BookingUpdateDTO bookingUpdateDTO) {
-        bookingRepository.save(new Booking(bookingUpdateDTO));
+    public void update(@RequestBody @Valid BookingUpdateDTO bookingUpdateDTO, Principal principal) {
+        Optional<Booking> byId = bookingRepository.findByIdAndPrincipalName(bookingUpdateDTO.getId(), principal.getName());
+        byId.ifPresent(b -> {
+            Booking booking = new Booking(bookingUpdateDTO);
+            booking.setPrincipalName(principal.getName());
+            bookingRepository.save(booking);
+        });
     }
 
     @DeleteMapping("/booking/{id}")
@@ -67,8 +74,8 @@ public class BookingController {
     }
 
     @PutMapping("/booking/{id}/visitDateTimeClosed")
-    public void updateVisitDateTimeClosed(@PathVariable Long id, @RequestBody VisitDateTimeClosedDTO visitDateTimeClosedDTO) {
-        Optional<Booking> byId = bookingRepository.findById(id);
+    public void updateVisitDateTimeClosed(@PathVariable Long id, @RequestBody VisitDateTimeClosedDTO visitDateTimeClosedDTO, Principal principal) {
+        Optional<Booking> byId = bookingRepository.findByIdAndPrincipalName(id, principal.getName());
         byId.ifPresent(b -> {
             b.setVisitDateTimeClosed(visitDateTimeClosedDTO.isValue());
             bookingRepository.save(b);
