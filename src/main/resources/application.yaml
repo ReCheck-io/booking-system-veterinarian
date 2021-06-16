@@ -6,12 +6,13 @@ server:
 
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/bookingvetdb
+    url: jdbc:postgresql://ec2-54-74-35-87.eu-west-1.compute.amazonaws.com:5432/d528531p4p34up
     initialization-mode: always
-    separator: ^
-    username: app_dev_loc
-    password: app_dev_loc_opx07
+    username: gszojnmjnlaywp
+    password: fed3df9ab1039b5683fca4881adc05e80a5b40aa9f7ff1132d16f1bf66f627d9
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 6
   jpa:
     hibernate:
       ddl-auto: update

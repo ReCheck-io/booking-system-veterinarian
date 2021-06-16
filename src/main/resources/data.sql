@@ -1,6 +1,12 @@
-INSERT IGNORE INTO users (username, password, enabled)
-  values ('admin_YIE55O', '$2a$10$QqItJc0jcG.LaOcz3MpCOe/NjadeueciKdMaH9W/i4mvom0o9kGtW', 1)^
--- password : mk5R4WTM6
+INSERT INTO users (
+    SELECT * FROM (VALUES ('admin_YIE55O', '$2a$10$QqItJc0jcG.LaOcz3MpCOe/NjadeueciKdMaH9W/i4mvom0o9kGtW', true))
+                                            -- password : mk5R4WTM6
+    as tmp (username, password, enabled)
+  WHERE NOT EXISTS (SELECT 1 FROM users m where m.username = tmp.username)
+);
 
-INSERT IGNORE INTO authorities (username, authority)
-  values ('admin_YIE55O', 'ROLE_ADMIN')^
+INSERT INTO authorities (
+    SELECT * FROM (VALUES ('admin_YIE55O', 'ROLE_ADMIN'))
+    as tmp (username, authority)
+  WHERE NOT EXISTS (SELECT 1 FROM authorities m where m.username = tmp.username)
+);
