@@ -3,13 +3,16 @@ server:
     include-message: always
     include-binding-errors: always
     include-exception: false
+  servlet:
+    session:
+      timeout: 5m
 
 spring:
   datasource:
-    url: jdbc:postgresql://ec2-54-74-35-87.eu-west-1.compute.amazonaws.com:5432/d528531p4p34up
+    url: jdbc:postgresql://localhost:5432/bookingvetdb
     initialization-mode: always
-    username: gszojnmjnlaywp
-    password: fed3df9ab1039b5683fca4881adc05e80a5b40aa9f7ff1132d16f1bf66f627d9
+    username: postgres
+    password: I3VE6s5upFBvN
     hikari:
       connectionTimeout: 20000
       maximumPoolSize: 6
