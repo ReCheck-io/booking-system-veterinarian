@@ -1,5 +1,6 @@
 package io.recheck.jobsapp.bookingvet.backend.controller;
 
+import io.recheck.jobsapp.bookingvet.backend.dto.UsernamePasswordAuthenticationDTO;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     @PostMapping("/login")
-    public Authentication login(Authentication authentication) {
-        return authentication;
+    public UsernamePasswordAuthenticationDTO login(Authentication authentication) {
+        return new UsernamePasswordAuthenticationDTO(authentication);
     }
 
 }
