@@ -39,14 +39,15 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+            .csrf().disable()
             .authorizeRequests()
             .antMatchers(HttpMethod.DELETE, "/booking*").permitAll()
             .antMatchers("/admin/**").hasRole("ADMIN")
             .antMatchers(HttpMethod.GET,"/booking*", "/booking/**").hasRole("USER")
             .antMatchers(HttpMethod.POST,"/booking*", "/booking/**").hasRole("USER")
             .antMatchers(HttpMethod.PUT,"/booking*", "/booking/**").hasRole("USER")
+            .antMatchers(HttpMethod.POST,"/login").authenticated()
             .and()
-            .csrf().disable()
             .httpBasic()
             .authenticationEntryPoint(authenticationEntryPoint);
 

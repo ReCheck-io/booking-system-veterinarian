@@ -9,17 +9,15 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-@RestController()
+@RestController
 public class AdminController {
 
     @Autowired
@@ -30,6 +28,21 @@ public class AdminController {
 
     @Autowired
     private BookingRepository bookingRepository;
+
+    @GetMapping("/admin/users")
+    public List<UserDetails> getUsers() {
+        JdbcUserDetailsManager userDetailsManager = (JdbcUserDetailsManager) authenticationManagerBuilder.getDefaultUserDetailsService();
+
+        List<String> listUsernames =
+        userDetailsManager.getJdbcTemplate().queryForList("select username from authorities where authority = 'ROLE_USER'", String.class);
+
+        List<UserDetails> userDetailsList = new ArrayList<>();
+        for (String username : listUsernames) {
+            userDetailsList.add(userDetailsManager.loadUserByUsername(username));
+        }
+
+        return userDetailsList;
+    }
 
     @PostMapping("/admin/user")
     public UserDetailsDTO createUser(@RequestBody UserDetailsDTO userDetailsDTO) {
