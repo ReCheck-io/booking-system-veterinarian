@@ -1,4 +1,4 @@
-package io.recheck.jobsapp.bookingvet.backend;
+package io.recheck.jobsapp.bookingvet;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

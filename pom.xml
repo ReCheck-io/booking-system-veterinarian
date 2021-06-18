@@ -9,14 +9,99 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.recheck</groupId>
-	<artifactId>jobs-app.booking-vet.backend</artifactId>
+	<artifactId>booking-system-veterinarian</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>jobs-app.booking-vet.backend</name>
+	<name>booking-system-veterinarian</name>
 	<description>Application to apply for job position</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
+		<vaadin.version>14.6.3</vaadin.version>
 	</properties>
+
+	<pluginRepositories>
+		<!-- Repository needed for prerelease versions of Vaadin -->
+		<pluginRepository>
+			<id>vaadin-prereleases</id>
+			<url>https://maven.vaadin.com/vaadin-prereleases</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<repositories>
+		<!-- Repository needed for prerelease versions of Vaadin -->
+		<repository>
+			<id>vaadin-prereleases</id>
+			<url>https://maven.vaadin.com/vaadin-prereleases</url>
+		</repository>
+		<!-- Repository used by many Vaadin add-ons -->
+		<repository>
+			<id>Vaadin Directory</id>
+			<url>http://maven.vaadin.com/vaadin-addons</url>
+		</repository>
+	</repositories>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-bom</artifactId>
+				<version>${vaadin.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<!-- Replace artifactId with vaadin-core to use only free components -->
+			<artifactId>vaadin</artifactId>
+			<exclusions>
+				<!-- Webjars are only needed when running in Vaadin 13 compatibility mode -->
+				<exclusion>
+					<groupId>com.vaadin.webjar</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.webjars.bowergithub.insites</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.webjars.bowergithub.polymer</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.webjars.bowergithub.polymerelements</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.webjars.bowergithub.vaadin</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.webjars.bowergithub.webcomponents</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-spring-boot-starter</artifactId>
+			<exclusions>
+				<!-- Excluding so that webjars are not included. -->
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>

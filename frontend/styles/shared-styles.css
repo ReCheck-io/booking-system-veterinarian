@@ -1,0 +1,9 @@
+.header {
+    padding: 0 var(--lumo-space-m);
+    display:flex;
+    justify-content:center;
+}
+
+.header h3.viewTitle {
+    font-size: 1em;
+}
