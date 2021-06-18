@@ -7,3 +7,16 @@
 .header h3.viewTitle {
     font-size: 1em;
 }
+
+.admin-view {
+  display: block;
+}
+
+.leftColumnLayout {
+  padding: 20px;
+  width: 62%;
+}
+
+.rightColumnLayout {
+    width: 39%;
+}
