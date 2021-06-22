@@ -1,4 +1,4 @@
-package io.recheck.jobsapp.bookingvet.frontend.components;
+package io.recheck.jobsapp.bookingvet.frontend.components.userDetails;
 
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -10,7 +10,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import io.recheck.jobsapp.bookingvet.backend.dto.UserDetailsDTO;
 
-public class UserDetailsLayout extends Div {
+public class UserDetailsFormLayout extends Div {
 
     private H3 title = new H3();
 
@@ -20,7 +20,7 @@ public class UserDetailsLayout extends Div {
     private Button createButton = new Button("Create");
     private Button cancelButton = new Button("Cancel");
 
-    public UserDetailsLayout() {
+    public UserDetailsFormLayout() {
         initLayout();
         initComponents();
     }

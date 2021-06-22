@@ -1,20 +1,17 @@
-package io.recheck.jobsapp.bookingvet.frontend.components.uoiGrid;
+package io.recheck.jobsapp.bookingvet.frontend.components.userDetails;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.data.provider.ListDataProvider;
 import io.recheck.jobsapp.bookingvet.backend.dto.UserDetailsDTO;
 import io.recheck.jobsapp.bookingvet.frontend.components.ExtendedGrid;
 import lombok.Getter;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
-import java.util.Optional;
 
 @Getter
 public class UserDetailsGrid extends ExtendedGrid<UserDetailsDTO> {
 
-    protected UserDetailsGridListeners userDetailsGridListeners;
+    private UserDetailsGridListeners userDetailsGridListeners;
 
     public UserDetailsGrid(List<UserDetailsDTO> dataProvider, UserDetailsGridListeners userDetailsGridListeners) {
         super(dataProvider);
@@ -22,7 +19,7 @@ public class UserDetailsGrid extends ExtendedGrid<UserDetailsDTO> {
         initColumns();
     }
 
-    protected void initColumns() {
+    private void initColumns() {
         addColumn(UserDetailsDTO::getUsername);
         addColumn(UserDetailsDTO::getPassword);
         addColumn(UserDetailsDTO::isEnabled);
@@ -55,8 +52,4 @@ public class UserDetailsGrid extends ExtendedGrid<UserDetailsDTO> {
         setSelectionMode(Grid.SelectionMode.NONE);
     }
 
-    private Optional<UserDetails> findItemByUserDetails(String s) {
-        ListDataProvider<UserDetails> dataProvider = (ListDataProvider) getDataProvider();
-        return dataProvider.getItems().stream().filter(userDetails -> userDetails.getUsername().equals(s)).findFirst();
-    }
 }

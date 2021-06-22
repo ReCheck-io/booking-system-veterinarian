@@ -1,7 +1,11 @@
 package io.recheck.jobsapp.bookingvet.backend.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.recheck.jobsapp.bookingvet.backend.entity.Booking;
+import io.recheck.jobsapp.bookingvet.utils.DateTimeUtils;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -10,6 +14,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
 public class BookingUpdateDTO {
 
     @NotNull
@@ -45,4 +50,17 @@ public class BookingUpdateDTO {
     private boolean visitIsFirstTime;
 
     private boolean visitDateTimeClosed;
+
+    public BookingUpdateDTO(Booking booking) {
+        BeanUtils.copyProperties(booking, this);
+
+        LocalDateTime localDateTime1 = DateTimeUtils.convertOrReturnNull(booking.getVisitDateTime());
+        if (localDateTime1 != null) {
+            setVisitDateTime(localDateTime1);
+        }
+    }
+
+    public void setVisitDateTime(LocalDateTime visitDateTime) {
+        this.visitDateTime = visitDateTime.minusHours(2);
+    }
 }

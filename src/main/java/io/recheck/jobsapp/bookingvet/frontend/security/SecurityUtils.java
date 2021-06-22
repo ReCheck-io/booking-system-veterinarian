@@ -35,10 +35,10 @@ public final class SecurityUtils {
     }
 
     public static boolean isUserRole() {
-        return getUserAuth().getAuthorities().stream().anyMatch(ga -> ga.getAuthority().equals("ROLE_USER"));
+        return getUserAuth() != null && getUserAuth().getAuthorities().stream().anyMatch(ga -> ga.getAuthority().equals("ROLE_USER"));
     }
 
     public static boolean isAdminRole() {
-        return getUserAuth().getAuthorities().stream().anyMatch(ga -> ga.getAuthority().equals("ROLE_ADMIN"));
+        return getUserAuth() != null && getUserAuth().getAuthorities().stream().anyMatch(ga -> ga.getAuthority().equals("ROLE_ADMIN"));
     }
 }

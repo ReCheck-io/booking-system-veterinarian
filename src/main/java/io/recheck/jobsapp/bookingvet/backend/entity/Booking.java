@@ -2,6 +2,7 @@ package io.recheck.jobsapp.bookingvet.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.recheck.jobsapp.bookingvet.backend.dto.BookingUpdateDTO;
+import io.recheck.jobsapp.bookingvet.utils.DateTimeUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -9,7 +10,9 @@ import org.springframework.beans.BeanUtils;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 @Data
 @NoArgsConstructor
@@ -45,8 +48,30 @@ public class Booking {
 
     public Booking(BookingUpdateDTO bookingUpdateDTO) {
         BeanUtils.copyProperties(bookingUpdateDTO, this);
-        String datePattern = "yyyy-MM-dd HH:mm";
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(datePattern);
-        this.setVisitDateTime(bookingUpdateDTO.getVisitDateTime().minusHours(2).format(dateTimeFormatter));
+        this.setVisitDateTime(DateTimeUtils.convertOrReturnNull(bookingUpdateDTO.getVisitDateTime()));
+    }
+
+    public boolean equals(Object o) {
+        if(o == null)
+            return false;
+
+        if(!(o instanceof Booking))
+            return false;
+
+        Booking other = (Booking) o;
+        return this.getId().equals(other.id);
+    }
+
+
+    public void setAnimalAge(Integer animalAge) {
+        this.animalAge = Optional.ofNullable(animalAge).orElse(0);
+    }
+
+    public void setVisitReason(String visitReason) {
+        this.visitReason = Optional.ofNullable(visitReason).orElse("Diagnosing");
+    }
+
+    public void setVisitIsFirstTime(Boolean visitIsFirstTime) {
+        this.visitIsFirstTime = Optional.ofNullable(visitIsFirstTime).orElse(true);
     }
 }

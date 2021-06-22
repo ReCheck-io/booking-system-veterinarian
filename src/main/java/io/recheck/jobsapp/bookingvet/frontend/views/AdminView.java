@@ -10,9 +10,9 @@ import com.vaadin.flow.router.Route;
 import io.recheck.jobsapp.bookingvet.backend.dto.UserDetailsDTO;
 import io.recheck.jobsapp.bookingvet.backend.service.AdminService;
 import io.recheck.jobsapp.bookingvet.frontend.components.ErrorDialog;
-import io.recheck.jobsapp.bookingvet.frontend.components.UserDetailsLayout;
-import io.recheck.jobsapp.bookingvet.frontend.components.uoiGrid.UserDetailsGrid;
-import io.recheck.jobsapp.bookingvet.frontend.components.uoiGrid.UserDetailsGridListeners;
+import io.recheck.jobsapp.bookingvet.frontend.components.userDetails.UserDetailsFormLayout;
+import io.recheck.jobsapp.bookingvet.frontend.components.userDetails.UserDetailsGrid;
+import io.recheck.jobsapp.bookingvet.frontend.components.userDetails.UserDetailsGridListeners;
 
 import java.util.List;
 
@@ -29,9 +29,9 @@ public class AdminView extends Div {
     private UserDetailsGridListeners userDetailsGridListeners;
     private VerticalLayout gridLayout;
 
-    private UserDetailsLayout userDetailsLayout = new UserDetailsLayout();
+    private UserDetailsFormLayout userDetailsFormLayout = new UserDetailsFormLayout();
 
-    protected ErrorDialog errorDialog = new ErrorDialog();
+    private ErrorDialog errorDialog = new ErrorDialog();
 
     private VerticalLayout viewLayout = new VerticalLayout();
 
@@ -49,7 +49,7 @@ public class AdminView extends Div {
         horizontalLayout.setAlignItems(FlexComponent.Alignment.CENTER);
         gridLayout = new VerticalLayout(horizontalLayout, userDetailsGrid);
 
-        viewLayout.add(userDetailsLayout);
+        viewLayout.add(userDetailsFormLayout);
 
         add(new HorizontalLayout(gridLayout, viewLayout));
 
@@ -57,7 +57,7 @@ public class AdminView extends Div {
     }
 
     private void applyCss() {
-        addClassName("admin-view");
+        addClassName("panel-view");
 
         gridLayout.getStyle().clear();
         gridLayout.addClassName("leftColumnLayout");
@@ -69,11 +69,11 @@ public class AdminView extends Div {
     private void initListeners() {
         newButton.addClickListener(e -> {
             toInitState();
-            userDetailsLayout.toCreateState();
+            userDetailsFormLayout.toCreateState();
         });
 
-        userDetailsLayout.createClickListener(e -> {
-            UserDetailsDTO data = userDetailsLayout.getData();
+        userDetailsFormLayout.createClickListener(e -> {
+            UserDetailsDTO data = userDetailsFormLayout.getData();
             try {
                 UserDetailsDTO userDetailsResponse = adminService.createUser(data);
                 userDetailsGrid.addItem(userDetailsResponse);
@@ -84,7 +84,7 @@ public class AdminView extends Div {
             }
         });
 
-        userDetailsLayout.cancelClickListener(e -> toInitState());
+        userDetailsFormLayout.cancelClickListener(e -> toInitState());
 
         userDetailsGridListeners = new UserDetailsGridListeners() {
             @Override
@@ -104,7 +104,7 @@ public class AdminView extends Div {
     }
 
     private void toInitState() {
-        userDetailsLayout.setVisible(false);
+        userDetailsFormLayout.setVisible(false);
     }
 
 }

@@ -8,7 +8,7 @@
     font-size: 1em;
 }
 
-.admin-view {
+.panel-view {
   display: block;
 }
 
@@ -19,4 +19,16 @@
 
 .rightColumnLayout {
     width: 39%;
+}
+
+.bookingFormLayout {
+    width: 100%;
+}
+
+.width50 {
+    width: 50%;
+}
+
+.closed {
+  background-color: gray;
 }

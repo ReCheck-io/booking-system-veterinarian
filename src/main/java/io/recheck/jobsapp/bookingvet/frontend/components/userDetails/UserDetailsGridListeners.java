@@ -1,4 +1,4 @@
-package io.recheck.jobsapp.bookingvet.frontend.components.uoiGrid;
+package io.recheck.jobsapp.bookingvet.frontend.components.userDetails;
 
 import io.recheck.jobsapp.bookingvet.backend.dto.UserDetailsDTO;
 
