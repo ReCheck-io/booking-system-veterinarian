@@ -77,6 +77,14 @@ public class BookingFormLayout extends Div {
         String[] visitReasonArr = visitReasonList.toArray(new String[visitReasonList.size()]);
         visitReasonRadio.setItems(visitReasonArr);
 
+        visitReasonRadio.addValueChangeListener(e -> {
+            if (ownerNameField.hasClassName("ownerNameTxtField")) {
+                ownerNameField.removeClassName("ownerNameTxtField");
+            } else {
+                ownerNameField.addClassName("ownerNameTxtField");
+            }
+        });
+
         applyCss();
     }
 
@@ -84,6 +92,7 @@ public class BookingFormLayout extends Div {
         addClassName("bookingFormLayout");
         animalBreedField.addClassName("width50");
         animalAgeField.addClassName("width50");
+        animalAgeField.addClassName("animalAgeField");
         ownerNameField.addClassName("width50");
         ownerLastNameField.addClassName("width50");
         visitDateTimeField.addClassName("width50");

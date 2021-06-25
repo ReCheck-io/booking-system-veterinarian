@@ -31,6 +31,7 @@ public class BookingGrid extends ExtendedGrid<Booking> {
             button.addClickListener(e -> {
                 bookingGridListeners.detailsClickListener(booking);
             });
+            button.addClassName("detailsBtn");
             return button;
         });
 

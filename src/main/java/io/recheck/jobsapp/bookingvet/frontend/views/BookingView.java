@@ -75,6 +75,8 @@ public class BookingView extends Div {
     private void applyCss() {
         addClassName("panel-view");
 
+        bookingGrid.addClassName("table-1");
+
         gridLayout.getStyle().clear();
         gridLayout.addClassName("leftColumnLayout");
 
