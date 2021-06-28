@@ -32,6 +32,7 @@ vaadin-login-form-wrapper[part="vaadin-login-native-form-wrapper"] {
 
 .loginLeftColumnLayout {
   width: 55%;
+  height: 100vh;
 }
 
 .loginRightColumnLayout {
