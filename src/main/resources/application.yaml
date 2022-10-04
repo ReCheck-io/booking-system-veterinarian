@@ -9,10 +9,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://ec2-54-74-35-87.eu-west-1.compute.amazonaws.com:5432/d528531p4p34up
-    initialization-mode: always
+    url: jdbc:h2:tcp://localhost:9092/./home/ubuntu/booking-system-veterinarian-database/database
     username: gszojnmjnlaywp
     password: fed3df9ab1039b5683fca4881adc05e80a5b40aa9f7ff1132d16f1bf66f627d9
+    initialization-mode: always
     hikari:
       connectionTimeout: 20000
       maximumPoolSize: 6
